@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
+import Home from "./screens/Home";
+import Event from "./screens/Event";
+const stack = createNativeStackNavigator();
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<NavigationContainer>
+			<stack.Navigator
+				initialRouteName="home"
+				screenOptions={{ headerShown: false }}>
+				<stack.Screen
+					name="Home"
+					component={Home}
+				/>
+				<stack.Screen
+					name="Event"
+					component={Event}
+					options={{
+						headerShown: true,
+						title: "Event 2777710",
+						headerStyle: {
+							backgroundColor: "#e8e8e8",
+						},
+						headerRight: () => (
+							<Icon
+								name="ios-share"
+								size={20}
+							/>
+						),
+					}}
+				/>
+			</stack.Navigator>
+		</NavigationContainer>
+	);
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
